@@ -4,7 +4,7 @@
 
 int WinMain(){
     Armazenar_arquivos nomearquivos;
-    //nomearquivos.imprimir(); testar se os arquivos estão todos sendo lidos
+    //nomearquivos.imprimir(); //testar se os arquivos estão todos sendo lidos
     Index t;
     t.copiar_arquivo(nomearquivos);
     std::string s;

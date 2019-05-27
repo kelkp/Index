@@ -26,10 +26,13 @@ class Armazenar_arquivos{
         Armazenar_arquivos();//construtor
         virtual ~Armazenar_arquivos(); // destrutor
         void imprimir(); // função para verificar se todos os arquivos estão sendo lidos
+        void nome_diretorios();
+        void nome_arquivos();
         void chechar_maiscula(std::string &s); // converte a palavra digitada para minuscula
 
     private:
-        std::vector<std::string> stringvec; // vetor de string que recebe o nome dos arquivos na pasta
+        std::vector<std::string> stringvec;
+        std::vector<std::string> nomearquivos; // vetor de string que recebe o nome dos arquivos na pasta
         friend void Index::copiar_arquivo(Armazenar_arquivos &nomearquivos); // função friend para permitir acesso de função da class Index
         friend void Index::encontrar (Armazenar_arquivos &nomearquivos,std::string busca); // função friend para permitir acesso de função da class Index
 };
