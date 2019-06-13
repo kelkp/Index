@@ -15,10 +15,12 @@ class Index{
         std::string remover(std::string text); // remove caracteres especiais
 
     private:
-        typedef std::pair<int,std::string> Chave_interna; // definição da chave interna
-        std::map<Chave_interna,std::string> Ar_Index; // declaração map
-        std::map<Chave_interna,std::string>::iterator it; // iterator
+        typedef std::pair<std::string,int> Chave_interna;// definição da chave interna
+        std::map<std::string,int> sub_map;
+        std::multimap<std::string,Chave_interna> Ar_Index; // declaração map
+        std::multimap<std::string,Chave_interna>::iterator it; // iterator
         std::string s; // string para a palavra buscada
+        double idf;
 };
 
 class Armazenar_arquivos{
@@ -36,6 +38,8 @@ class Armazenar_arquivos{
         friend void Index::copiar_arquivo(Armazenar_arquivos &nomearquivos); // função friend para permitir acesso de função da class Index
         friend void Index::encontrar (Armazenar_arquivos &nomearquivos,std::string busca); // função friend para permitir acesso de função da class Index
 };
+
+
 
 
 
