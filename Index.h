@@ -10,7 +10,7 @@ class Index{
         Index(); // construtor
         virtual ~Index(); // destrutor
         void copiar_arquivo(Armazenar_arquivos &nomearquivos); // abre os arquivos mapeados e chama a função adicionar para cada palavra
-        void adicionar( int posicao,std::string s, std::string fileName ); // adiciona as palavras a map
+        void adicionar( std::map<std::string,int> &vocabulario, std::string fileName ); // adiciona as palavras a map
         void encontrar (Armazenar_arquivos &nomearquivos,std::string busca); // função para encontrar as palavras digitadas na estrutura map
         std::string remover(std::string text); // remove caracteres especiais
 
@@ -20,7 +20,7 @@ class Index{
         std::multimap<std::string,Chave_interna> Ar_Index; // declaração map
         std::multimap<std::string,Chave_interna>::iterator it; // iterator
         std::string s; // string para a palavra buscada
-        double idf;
+        //double idf;
 };
 
 class Armazenar_arquivos{

@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <cmath>
 #include <bits/stdc++.h>
 
 
@@ -33,8 +34,7 @@ void Index::copiar_arquivo(Armazenar_arquivos &nomearquivos){
         }
         else{
                 std::cout<< "Arquivo ou Caminho não encontrado";
-            }
-
+        }
         for (std::map<std::string, int>::iterator itx = sub_map.begin(); itx != sub_map.end(); ++itx){
          Ar_Index.insert(std::make_pair(itx->first,Chave_interna(nomearquivos.nomearquivos[x],itx->second)));
         }
@@ -51,9 +51,11 @@ std::string Index::remover(std::string text){
 return text;
 }
 
-void Index::adicionar( int posicao,std::string s, std::string fileName){
+void Index::adicionar(std::map<std::string,int> &vocabulario, std::string fileName){
 
-    std::pair<std::string,int> key = make_pair(fileName, posicao);
+
+
+    //std::pair<std::string,int> key = make_pair(fileName, posicao);
      /*if(Ar_Index.find(s) != Ar_Index.end())
         Ar_Index[s]++;
     else
@@ -62,9 +64,7 @@ void Index::adicionar( int posicao,std::string s, std::string fileName){
 }
 
 void Index::encontrar(Armazenar_arquivos &nomearquivos,std::string busca){
-        std::cout <<nomearquivos.nomearquivos.size();
-        idf=log(Ar_Index.count(busca)/nomearquivos.nomearquivos.size());
-        std::cout << idf << " Para a palavra " << busca << ":";
+        double idf=log(nomearquivos.nomearquivos.size()/Ar_Index.count(busca));
         auto eqr = Ar_Index.equal_range(busca);
         if (eqr.first!=eqr.second){
         std::cout << "A Palavra: "<< busca<< " foi achada no(s) arquivo(s):" << '\n';
@@ -76,7 +76,6 @@ void Index::encontrar(Armazenar_arquivos &nomearquivos,std::string busca){
         else{
         std::cout << "A Palavra: " << busca<< " nao foi encontrada em nenhum arquivo."<< '\n';
         }
-
  }
 
 
