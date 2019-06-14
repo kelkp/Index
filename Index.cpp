@@ -51,26 +51,40 @@ std::string Index::remover(std::string text){
 return text;
 }
 
-void Index::adicionar(std::map<std::string,int> &vocabulario, std::string fileName){
-
-
-
-    //std::pair<std::string,int> key = make_pair(fileName, posicao);
-     /*if(Ar_Index.find(s) != Ar_Index.end())
-        Ar_Index[s]++;
-    else
-      Ar_Index.insert(std::make_pair(Chave_interna(posicao,s),fileName));*/
-
-}
 
 void Index::encontrar(Armazenar_arquivos &nomearquivos,std::string busca){
+        std::multimap<double,std::string> resultado;
+        std::multimap<double,std::string> resultado_final;
         double idf=log(nomearquivos.nomearquivos.size()/Ar_Index.count(busca));
         auto eqr = Ar_Index.equal_range(busca);
         if (eqr.first!=eqr.second){
         std::cout << "A Palavra: "<< busca<< " foi achada no(s) arquivo(s):" << '\n';
+
         auto st = eqr.first, en = eqr.second;
             for(auto itr = st; itr != en; ++itr){
-            std::cout << itr->second.first << ", " << itr->second.second << std::endl;
+            resultado.insert(std::pair<double, std::string>((idf*itr->second.second),itr->second.first));
+            }
+            for(std::map<double,std::string>::iterator itr = resultado.begin();itr != resultado.end(); itr++){
+                double numerator = 0;
+                double inside = 0;
+                double inside2 = 0;
+                int check=0;
+                for(std::map<double,std::string>::iterator itrinter = resultado.begin();itrinter != resultado.end(); itrinter++){
+                    if (check!=0){
+                    numerator +=itr->first*itrinter->first;
+                    inside += pow(itr->first, 2);
+                    inside2 += pow(itrinter->first, 2);
+                    }
+                    else
+                        check++;
+
+                }
+                double denominator =  sqrt(inside) *  sqrt(inside2);
+                resultado_final.insert(std::pair<double, std::string>((numerator/denominator),itr->second));
+
+            }
+            for(std::map<double,std::string>::iterator itr = resultado_final.begin();itr != resultado_final.end(); itr++){
+                std::cout <<itr->second<< std::endl;
             }
         }
         else{
